@@ -105,22 +105,14 @@ LP = W_S_LA*(1/(sigma*C_l_LAmax));
 landingDistance = 118*LP+400; %Pour vérifier
 
 
-
-V_s = sqrt(ws_cruising*2/(rho*C_l_LAmax));
-Puissance_disponible = T_W * V_s*1.1*0.7 ;
+V_s = sqrt(W_TO*2/(rho*S*C_l_LAmax));
+Puissance_disponible = T_W*W_TO *V_s*1.1*0.7 ;
 P_hp = Puissance_disponible/(550*rendement*sigma);
-
-%%%%%% GRAPHIQUES %%%%%%
-
-
+P_max_hp = Puissance_disponible/550;
 
 
 % Juste pour voir les valeurs
 
-display(S)
-display(W_TO)
-display(V_kts)
-display(P_hp)
-display(Range_iteration)
-display(landingDistance)
-display(takeoffDistance) 
+display(M)
+display(W_empty)
+display(W_S_LA*S)
