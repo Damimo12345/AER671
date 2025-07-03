@@ -1,14 +1,14 @@
 
-Hauteur = 29000 ; %On peux le modifier de 25000 ft à 29000 ft
+Hauteur = 25000 ; %On peux le modifier de 25000 ft à 29000 ft
 rho = density(Hauteur) ;
 
-v_initial = 145*1.687811; %en ft/sec pour le calcul de W/s cruise pour avoir le vrai V
+v_initial = 245*1.687811; %en ft/sec pour le calcul de W/s cruise pour avoir le vrai V
 M = v_initial / sqrt(1.4 * 1716 * tempatmstd(Hauteur)*1.8); % Calculate Mach number
 
 
-C_d0 = 0.023 ; %Le range change BCP quand je change le C_d0
+C_d0 = 0.0207 ; %Le range change BCP quand je change le C_d0
 e = 0.8 ;
-A = 7;
+A = 4;
 k = 1/(pi*A*e) ;
 
 reserve_fuel = 0.05 ;
@@ -42,16 +42,14 @@ V_kts = V/1.687811; % Vitesse en kts
 % end
 
 L_D_max = sqrt(1/(4*C_d0*k));
-C_BHP=0.47;
-rendement = 0.8 ;
+C_BHP=0.5;
+rendement = 0.7 ;
 C = consommation_spec(C_BHP,V,rendement);
 
 
 % À CHANGER À CHANQUE ITÉRATION (faire une boucle)
 Range_start= 0; %nm commencer à 600nm
 Range_iteration = 600 ;
-
-Vitesse = 0 ;
 
 while (abs(Range_start-Range_iteration) > 0.1)
 
@@ -96,18 +94,18 @@ sigma = rho/rhosl;
 % s_TO_start = 2800 ; % ft, on choisi au pif !!!!!
 
 C_l_TOmax = 1.7 ; % AVEC RAYMER
-T_W = 0.5 ; %Donnée historique (0,25-0,57)
+T_W = 0.57 ; %Donnée historique (0,25-0,57)
 W_S_TO = ws_cruising;
 
 TOP = W_S_TO* (1/C_l_TOmax)*(1/T_W)*(1/sigma) ; 
 
 takeoffDistance = 20.9*TOP+87*sqrt(TOP*T_W); 
 
-display(takeoffDistance) 
+
 
 %%%%%%%%%%%%%%% LANDING DISTANCE %%%%%%%%%%%%%%%%
 
-C_l_LAmax = 2.3 ; % AVEC RAYMER
+C_l_LAmax = 3.5 ; % AVEC RAYMER
 % S_L_start = 3000; % ft On choisi au pif !!!
 
 W_S_LA = (W_TO-W_fuel+((reserve_fuel+trapped_fuel)*W_fuel))/S;
@@ -115,7 +113,7 @@ LP = W_S_LA*(1/(sigma*C_l_LAmax));
 
 landingDistance = 118*LP+400; %Pour vérifier
 
-display(landingDistance)
+
 
 V_s = sqrt(ws_cruising*2/(rho*C_l_LAmax));
 Puissance_disponible = T_W * V_s*1.1*0.7 ;
@@ -130,6 +128,9 @@ display(M)
 display(C)
 display(L_D_max)
 display(S)
-display(Range_iteration)
 display(W_TO)
 display(V_kts)
+
+display(Range_iteration)
+display(landingDistance)
+display(takeoffDistance) 
