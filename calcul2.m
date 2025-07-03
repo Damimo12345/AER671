@@ -20,26 +20,24 @@ V = sqrt((2/rho)*ws_cruising)*((k/C_d0)^0.25); %ft/s
 V_kts = V/1.687811; % Vitesse en kts
 
 
-%%%%% Iteration sur la vitesse %%%%%
+v_initial = 0 ;
+V_kts = 245 ; % vitesse en KTS
 
-% v_initial = 0 ;
-% V_kts = 265 ; % vitesse en KTS
-% 
-% while (abs(v_initial-V_kts) > 0.01)
-% 
-%     v_initial = V_kts ;
-% 
-%     v_initial_1 = v_initial*1.687811; %en ft/sec pour le calcul de W/s cruise pour avoir le vrai V
-%     M = v_initial_1 / sqrt(1.4 * 1716 * tempatmstd(Hauteur)*1.8); % Calculate Mach number
-% 
-%     ws_cruising = (rho*(v_initial_1^2)/2)*sqrt(C_d0/k);
-% 
-%     V = sqrt((2/rho)*ws_cruising)*((k/C_d0)^0.25); %ft/s
-%     V_kts = V/1.687811; % Vitesse en kts
-% 
-%     display(V_kts)
-% 
-% end
+while (abs(v_initial-V_kts) > 0.1)
+
+    v_initial = V_kts ;
+
+    v_initial_1 = v_initial*1.687811; %en ft/sec pour le calcul de W/s cruise pour avoir le vrai V
+    M = v_initial_1 / sqrt(1.4 * 1716 * tempatmstd(Hauteur)*1.8); % Calculate Mach number
+
+    ws_cruising = (rho*(v_initial_1^2)/2)*sqrt(C_d0/k);
+
+    V = sqrt((2/rho)*ws_cruising)*((k/C_d0)^0.25); %ft/s
+    V_kts = V/1.687811; % Vitesse en kts
+
+    display(V_kts)
+
+end
 
 L_D_max = sqrt(1/(4*C_d0*k));
 C_BHP=0.5;
@@ -64,14 +62,7 @@ while (abs(Range_start-Range_iteration) > 0.1)
     W2_W1 = 0.975;
     Wla_W_3 = 0.995;
     W2_W3 = (W1_Wto*W2_W1*Wla_W_3)/(Wla_Wto) ;
-    
-    %Range à remettre en tant que "RANGE_START"
 
-    ws_cruising = ws_cruise(C_d0,A,Hauteur,M,'prop');
-    V = sqrt((2/rho)*ws_cruising)*((k/C_d0)^0.25); %ft/s
-    V_kts = V/1.687811; % Vitesse en kts
-    M = v_initial / sqrt(1.4 * 1716 * tempatmstd(Hauteur)*1.8);
-    
     Range_iteration = (V_kts/C)*L_D_max*log(W2_W3); %Ln c'est log sur MatLab
 
 end
@@ -119,18 +110,17 @@ V_s = sqrt(ws_cruising*2/(rho*C_l_LAmax));
 Puissance_disponible = T_W * V_s*1.1*0.7 ;
 P_hp = Puissance_disponible/(550*rendement*sigma);
 
+%%%%%% GRAPHIQUES %%%%%%
+
+
+
+
 % Juste pour voir les valeurs
 
-display(rho)
-display(V)
-display(W2_W3)
-display(M)
-display(C)
-display(L_D_max)
 display(S)
 display(W_TO)
 display(V_kts)
-
+display(P_hp)
 display(Range_iteration)
 display(landingDistance)
 display(takeoffDistance) 
