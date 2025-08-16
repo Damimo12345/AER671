@@ -11,7 +11,7 @@ Q_aile = 1 ; % p.39 Chapitre 4 (aile basse avec congé de raccordement)
 Q_empennage = 1.05 ; % Chapitre 6 (tableau)
 effilement = c_tip/c_root ;
 c_moy = 2*c_root/3 ; % Corde moyenne
-fleche_LE = 30 ; % degrée (SELON LES DONNÉES HISTORIQUE ET MON DESSIN) FLÈCHE !
+fleche_LE = 25 ; % degrée (SELON LES DONNÉES HISTORIQUE ET MON DESSIN) FLÈCHE !
 Alpha_HL_volet = 0.75 ; % pourcentage SELON RAYMER (aucune information dans le cours)   
 Alpha_HL_bec = 0.20; % poucentage SELON RAYMER (aucune information dans le cours)   
 
@@ -27,33 +27,33 @@ W_cruise = 3170 ; %(lbs), Même qu'au début (ce ne devrait pas avoir changé de
 fleche_ht = 12.15 ; % En degrée (SELON LES DONNÉES HISTORIQUE ET MON DESSIN) 
 fleche_vt = 23.79 ; % En degrée (SELON LES DONNÉES HISTORIQUE ET MON DESSIN) 
 
-c_t_HT = 2.14; % SELON DONNÉES HISTORIQUES ET MON DESSIN
+c_t_HT = 2.14; % SELON DONNÉES HISTORIQUES ET MON DESSIN (Corde)
 c_r_HT = 4 ;
 c_t_VT = 2.23;
 c_r_VT = 5.67;
 
-c_ht = 2*c_r_HT/3 ;
-c_vt = 2*c_r_VT/3 ;
+c_ht = 0.855 ; % coefficient de l'empennage horizontal
+c_vt = 0.07 ; % coefficient de l'empennage vertical
 
 eff_ht = c_t_HT/c_r_HT; % effilement H tail
 eff_vt = c_t_VT/c_r_VT; % effilement V tail
 
 A_ht = 3.73368 ;
-A_vt = 2.59823/2;
+A_vt = 1.30;
 
-D_max = 5 ;
-L_tot = 29 ;
+D_max = 3.5 ; % J'ai mis 5 au début
+L_tot = 22 ; % plus petit que 29 ?
 
 Lsection_const = 0 ;
-k = 0.09947 ;
+k = 2.5e-6 ; % c'est pas le même K que d'habitude (DEMANDER AU PROF)
 
-l_ht = 12.5 ;
-l_vt = 12.5 ;
+l_ht = 12.5 ; % avant 12.5
+l_vt = 12.5 ; % avant 12.5, longueur par rapport au cg
 
 % Profil (À CHOISIR SE LE PROFIL)
 
 t_c_rel = 0.12 ; % On trouve ça sur airfoil tools
-t_c_max = 0.30 ; % Position de l'épaisseur maximal (Pour beaucoup de profils NACA 4- et 5-digits, l'épaisseur max se trouve à 30 % de la corde)
+t_c_max = 0.4 ; % Position de l'épaisseur maximal (Pour beaucoup de profils NACA 4- et 5-digits, l'épaisseur max se trouve à 30 % de la corde)
 c_prime_c_volet = 1.6 ; % Valeur arbitraire donnée par chapGPT par rapport au gain de surface grâce au volets
 c_prime_c_bec = 1.05; % Valeur arbitraire donnée par chapGPT par rapport au gain de surface grâce au slats
 
